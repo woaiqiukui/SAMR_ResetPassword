@@ -8,3 +8,16 @@ SAMR修改域内主机密码
 核心的hSamrSetPasswordInternal4New也是直接用的impacket.impacket.dcerpc.v5.samr.hSamrSetPasswordInternal4New
 
 脚本暂只支持明文修改密码，对修改权限及被修改的域用户是否存在会进行校验
+
+### 权限不够
+<img width="883" alt="image" src="https://user-images.githubusercontent.com/49117752/155850052-a8363cbd-cdf1-4af3-a053-2f1fb93c27ce.png">
+
+
+
+### 用户不存在
+<img width="906" alt="image" src="https://user-images.githubusercontent.com/49117752/155850074-ed8ce44a-c74b-4bcd-8a7b-baaea78dc1d3.png">
+
+
+
+### 改密成功
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/49117752/155850066-91bd7686-f4da-4e34-86a8-49b4282fcbe3.png">
