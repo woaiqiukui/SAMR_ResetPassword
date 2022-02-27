@@ -9,9 +9,7 @@ SAMR修改域内主机密码
 
 脚本暂只支持明文修改密码，对修改权限及被修改的域用户是否存在会进行校验
 
-### 权限不够
-<img width="883" alt="image" src="https://user-images.githubusercontent.com/49117752/155850052-a8363cbd-cdf1-4af3-a053-2f1fb93c27ce.png">
-
+### 权限不够<img width="901" alt="image" src="https://user-images.githubusercontent.com/49117752/155889329-e81aae89-b2a4-4b39-bb5e-efecfd07ddb2.png">
 
 
 ### 用户不存在
