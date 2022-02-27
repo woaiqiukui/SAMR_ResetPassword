@@ -1,4 +1,5 @@
 
+import opcode
 import re
 import sys
 import logging
@@ -24,6 +25,7 @@ class RESETNTLM:
         self.__doKerberos = options.k
         self.__aeskey = options.aesKey
         self.__kdcHost = options.dc_host
+        self.__new_passwd = options.new_pass
 
         if options.hashes is not None:
             self.__lmhash, self.__nthash = options.hashes.split(':')
@@ -129,17 +131,12 @@ class RESETNTLM:
                 exit(0)
 
             try:
-                resetPasswdStatus = samr.hSamrSetPasswordInternal4New(dce, userHandle, self.__password)
-            except samr.DCERPCSessionError as e:
-                if e.error_code == 0xC000006A:
-                    print('[-] STATUS_WRONG_PASSWORD. Wrong password.')
-                elif e.error_code == 0xC000006C:
-                    print('[-] STATUS_PASSWORD_RESTRICTION. Password does not meet requirements.')
-                else:
-                    print('[-] Error code: {}'.format(e.error_code))
-            else:
-                if resetPasswdStatus['ErrorCode'] == 0:
-                    print('[+] Reset password success!')
+                resetPasswdStatus = samr.hSamrSetPasswordInternal4New(dce, userHandle, self.__new_passwd)
+            except Exception as e:
+                import traceback
+                traceback.print_exc()
+            if resetPasswdStatus['ErrorCode'] == 0:
+                print('[+] Reset password success!')
 
         except Exception as e:
             if logging.getLogger().level == logging.DEBUG:
@@ -209,6 +206,7 @@ if __name__ == '__main__':
     domain, username, password = re.compile('(?:(?:([^/:]*)/)?([^:]*)(?::(.*))?)?').match(
         options.target).groups('')
 
+    print(domain, username, password)
     # If you use kerberos tickets, the domain name here needs to
     # correspond to the domain name in the ticket. otherwise an
     # KDC_ERR_PREAUTH_FAILED error will occur.
