@@ -206,7 +206,6 @@ if __name__ == '__main__':
     domain, username, password = re.compile('(?:(?:([^/:]*)/)?([^:]*)(?::(.*))?)?').match(
         options.target).groups('')
 
-    print(domain, username, password)
     # If you use kerberos tickets, the domain name here needs to
     # correspond to the domain name in the ticket. otherwise an
     # KDC_ERR_PREAUTH_FAILED error will occur.
